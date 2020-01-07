@@ -1,0 +1,32 @@
+---
+kind: pipeline
+name: default
+
+steps:
+  - name: restore-yarn-cache
+    image: meltwater/drone-cache:1.0.4
+    environment:
+      AWS_ACCESS_KEY_ID:
+        from_secret: AWS_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY:
+        from_secret: AWS_SECRET_ACCESS_KEY
+    pull: true
+    settings:
+      pull: true
+      restore: true
+      cache_key: "yarn"
+      bucket: qoala-build-drone-cache
+      region: ap-southeast-1
+      mount:
+        - ".yarn-cache"
+    when:
+      branch:
+        include:
+          - master
+          - rc
+          - release
+
+cache:
+  mount:
+    - node_modules
+    - .git
