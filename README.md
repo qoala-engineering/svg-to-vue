@@ -45,4 +45,3 @@ svgToVue(code, {
 | `svgoPath` | `String` | `null` | Path to SVG file which is used by SVGO `prefixIds` plugin to generate unique IDs |
 
 
-
